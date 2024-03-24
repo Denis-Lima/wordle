@@ -1,6 +1,6 @@
 # wordle
 
-This template should help get you started developing with Vue 3 in Vite.
+This project is about learning TDD with Vue. It's based on course of VueSchool.
 
 ## Recommended IDE Setup
 
