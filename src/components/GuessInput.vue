@@ -6,6 +6,8 @@ import GuessView from './GuessView.vue';
 
 const emit = defineEmits<{ "guess-submitted": [guess: string] }>()
 
+withDefaults(defineProps<{ disabled?: boolean }>(), { disabled: false })
+
 const guessInProgress = ref<string>("")
 
 function onSubmit() {
@@ -21,7 +23,7 @@ watch(guessInProgress, v => { guessInProgress.value = v.slice(0, WORD_SIZE).toUp
 <template>
   <GuessView :guess="guessInProgress" />
   <input type="text" v-model="guessInProgress" @keydown.enter="onSubmit" maxlength="WORD_SIZE" autofocus
-    @blur="({ target }) => (target as HTMLInputElement).focus()">
+    @blur="({ target }) => (target as HTMLInputElement).focus()" :disabled="disabled">
 </template>
 
 <style scoped>
