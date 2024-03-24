@@ -36,7 +36,6 @@ input {
   padding: 0;
   display: flex;
   gap: 0.25rem;
-  justify-content: center;
 }
 
 .letter {
