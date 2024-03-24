@@ -32,7 +32,7 @@ describe('WordleBoard', () => {
     expect(wrapper.text()).not.toContain(DEFEAT_MESSAGE)
   })
 
-  test('If a word of the day provided does not have exactly 5 characters, a warning is emitted', async () => {
+  test('if a word of the day provided does not have exactly 5 characters, a warning is emitted', async () => {
     // const spy = vi.spyOn(console, "warn")
     // spy.mockImplementation(() => null)
     console.warn = vi.fn()
@@ -42,7 +42,7 @@ describe('WordleBoard', () => {
     expect(console.warn).toHaveBeenCalled()
   })
 
-  test('If the word of the day is not all in uppercase, a warning is emitted', async () => {
+  test('if the word of the day is not all in uppercase, a warning is emitted', async () => {
     console.warn = vi.fn()
 
     mount(WordleBoard, { props: { wordOfTheDay: 'tests' } })
@@ -50,12 +50,20 @@ describe('WordleBoard', () => {
     expect(console.warn).toHaveBeenCalled()
   })
 
-  test('If the word of the day is not a real English word, a warning is emitted', async () => {
+  test('if the word of the day is not a real English word, a warning is emitted', async () => {
     console.warn = vi.fn()
 
     mount(WordleBoard, { props: { wordOfTheDay: 'QWERT' } })
 
     expect(console.warn).toHaveBeenCalled()
+  })
+
+  test('no warning is emitted if the word of the day provided is a real uppercase English word with 5 characters', async () => {
+    console.warn = vi.fn()
+
+    mount(WordleBoard, { props: { wordOfTheDay: 'TESTS' } })
+
+    expect(console.warn).not.toHaveBeenCalled()
   })
 })
 
