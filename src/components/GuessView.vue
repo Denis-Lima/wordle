@@ -19,6 +19,11 @@ defineProps<{ guess: string }>()
   gap: 0.25rem;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+}
+
 .letter {
   background-color: white;
   border: 1px solid hsl(0, 0%, 70%);
