@@ -11,6 +11,7 @@ function onSubmit() {
   if (!englishWords.includes(guessInProgress.value)) return
 
   emit("guess-submitted", guessInProgress.value)
+  guessInProgress.value = ''
 }
 
 watch(guessInProgress, v => { guessInProgress.value = v.slice(0, WORD_SIZE).toUpperCase().replace(/[^A-Z]+/gi, '') })
