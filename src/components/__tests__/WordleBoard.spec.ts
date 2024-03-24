@@ -16,7 +16,6 @@ describe('WordleBoard', () => {
   }
 
   describe('End of the game messages', () => {
-
     test('a victory message appears when the user makes a guess that matches the word of the day', async () => {
       await playerSubmitsGuess(wordOfTheDay)
 
@@ -36,23 +35,23 @@ describe('WordleBoard', () => {
   })
 
   describe('Rules for defining the word of the day', () => {
+    beforeEach(() => {
+      // const spy = vi.spyOn(console, "warn")
+      // spy.mockImplementation(() => null)
+      console.warn = vi.fn()
+    })
+
     test.each([
       { wordOfTheDay: 'FLY', reason: 'word-of-the-day must have 5 characters' },
       { wordOfTheDay: 'tests', reason: 'word-of-the-day must be all in uppercase' },
       { wordOfTheDay: 'QWERT', reason: 'word-of-the-day must be a valid English word' }
     ])("Since $reason: $wordOfTheDay is invalid, therefore a warning must be emitted", async ({ wordOfTheDay, reason }) => {
-      // const spy = vi.spyOn(console, "warn")
-      // spy.mockImplementation(() => null)
-      console.warn = vi.fn()
-
       mount(WordleBoard, { props: { wordOfTheDay } })
 
       expect(console.warn).toHaveBeenCalled()
     })
 
     test('no warning is emitted if the word of the day provided is a real uppercase English word with 5 characters', async () => {
-      console.warn = vi.fn()
-
       mount(WordleBoard, { props: { wordOfTheDay: 'TESTS' } })
 
       expect(console.warn).not.toHaveBeenCalled()
